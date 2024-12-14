@@ -1,0 +1,105 @@
+const int led1 = 2;
+const int led2 = 3;
+const int led3 = 4;
+const int ldr1 = A0;
+const int ldr2 = A1;
+const int ldr3 = A2;
+const int ldrm = A3;
+const int led1r = 5;
+const int led2r = 6;
+const int led3r = 7;
+const int ir = 12;
+
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(ldrm,INPUT);
+pinMode(led1,OUTPUT);
+pinMode(led2,OUTPUT);
+pinMode(led3,OUTPUT);
+pinMode(led1r,OUTPUT);
+pinMode(led2r,OUTPUT);
+pinMode(led3r,OUTPUT);
+ digitalWrite(6,LOW); 
+ digitalWrite(7,LOW); 
+ digitalWrite(5,LOW);
+
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+int i = digitalRead(ldrm);
+if(i == HIGH)
+{
+ ledhandle();
+ ledch();
+}  
+
+else
+{
+ analogWrite(9,0); 
+ analogWrite(10,0); 
+ analogWrite(11,0); 
+}
+
+}
+
+void ledch()
+{
+  int a = analogRead(ldr1);
+  Serial.println(a);
+  delay(200);
+  if(a > 500)
+  {   
+  digitalWrite(5,LOW);
+  }  
+  else
+  {  
+  digitalWrite(5,HIGH); 
+  }
+
+   
+  int b = analogRead(ldr2);
+  Serial.println(b);
+  delay(200);
+  if(b > 500)
+  {   
+  digitalWrite(6,LOW);
+  }  
+  else
+  {  
+  digitalWrite(6,HIGH); 
+  }
+
+  int c = analogRead(ldr3);
+  Serial.println(c);
+  delay(200);
+  if(c > 500)
+  {   
+  digitalWrite(7,LOW);
+  }  
+  else
+  {  
+  digitalWrite(7,HIGH); 
+  }  
+  
+}
+
+void ledhandle()
+{
+int a1 = digitalRead(ir);
+if(a1 == LOW)
+{
+ analogWrite(9,255); 
+ analogWrite(10,255); 
+ analogWrite(11,255); 
+ delay(2000);
+} 
+else
+{
+ analogWrite(9,50); 
+ analogWrite(10,50); 
+ analogWrite(11,50);  
+}   
+}
